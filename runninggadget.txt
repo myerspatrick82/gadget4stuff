@@ -1,0 +1,6 @@
+module load mpi
+export LD_LIBRARY_PATH=/shared/common/hdf5/lib:$LD_LIBRARY_PATH
+change makefile
+USE MAKE EXAMPLES
+cd to file
+sbatch ./job.sh
