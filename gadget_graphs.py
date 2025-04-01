@@ -12,22 +12,38 @@
 
 # plot.save("dm_particle_plot_002.png")
 import yt
+import os
 
-# Load the dataset
-ds = yt.load("ex2/snapshot_002.hdf5")
+# Folder where your .hdf5 snapshots live
+snapshot_folder = "ex2/hdf5"
+output_folder = "plots"
 
-# Create the 2D particle phase plot
-plot = yt.ParticlePhasePlot(ds,
-                            ("PartType1", "particle_position_x"),
-                            ("PartType1", "particle_position_y"),
-                            ("PartType1", "particle_mass"))
+# Make output directory if it doesn't exist
+os.makedirs(output_folder, exist_ok=True)
 
-# Customize appearance
-plot.set_cmap(("PartType1", "particle_mass"), "viridis")
-plot.set_log(("PartType1", "particle_mass"), True)
+# Loop over snapshot_000.hdf5 to snapshot_045.hdf5
+for i in range(46):
+    snapshot_name = f"snapshot_{i:03d}.hdf5"
+    snapshot_path = os.path.join(snapshot_folder, snapshot_name)
 
-# Manually set the title (this bypasses yt's internal ambiguity issue)
-plot.plots[("PartType1", "particle_mass")].axes.set_title("Dark Matter Particle Phase Plot")
+    # Load the dataset
+    ds = yt.load(snapshot_path)
 
-# Save the result
-plot.save("dm_particle_phase_plot_002.png")
+    # Create the 2D particle phase plot
+    plot = yt.ParticlePhasePlot(ds,
+                                ("PartType1", "particle_position_x"),
+                                ("PartType1", "particle_position_y"),
+                                ("PartType1", "particle_mass"))
+
+    # Customize plot
+    plot.set_cmap(("PartType1", "particle_mass"), "viridis")
+    plot.set_log(("PartType1", "particle_mass"), True)
+    plot.plots[("PartType1", "particle_mass")].axes.set_title(
+        f"Dark Matter Particle Phase Plot — {snapshot_name}"
+    )
+
+    # Save to plots/dm_particle_phase_plot_###.png
+    output_filename = os.path.join(output_folder, f"dm_particle_phase_plot_{i:03d}.png")
+    plot.save(output_filename)
+
+    print(f"Saved {output_filename}")
