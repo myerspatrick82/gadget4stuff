@@ -3,7 +3,7 @@ import os
 
 # Folder where your images are saved
 plot_folder = "plots"
-output_gif = "dark_matter_phase_plots.gif"
+output_gif = "galaxy_collision_zoomed.gif"
 
 # Get all the phase plot images in sorted order
 image_filenames = [f"dm_particle_phase_plot_{i:03d}.png" for i in range(46)]

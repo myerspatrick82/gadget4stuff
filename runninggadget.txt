@@ -4,3 +4,6 @@ change makefile
 USE MAKE EXAMPLES
 cd to file
 sbatch ./job.sh
+
+FOR SWAPPING FILES (from git bash on home desktop)
+scp cluster:/nfs/home/myersps/gadget4/examples/CollidingGalaxiesSFR/output/snapshot_0{00..45}.hdf5 "C:/Users/Patrick Myers/Documents/GitHub/gadget4stuff/ex2/hdf5/"

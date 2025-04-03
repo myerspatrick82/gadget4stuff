@@ -38,6 +38,13 @@ for i in range(46):
     # Customize plot
     plot.set_cmap(("PartType1", "particle_mass"), "viridis")
     plot.set_log(("PartType1", "particle_mass"), True)
+
+    # Set axis range manually
+    xlim = (-7000, 7000)
+    ylim = (-7000, 7000)
+    plot.set_xlim(*xlim)
+    plot.set_ylim(*ylim)
+
     plot.plots[("PartType1", "particle_mass")].axes.set_title(
         f"Dark Matter Particle Phase Plot — {snapshot_name}"
     )
